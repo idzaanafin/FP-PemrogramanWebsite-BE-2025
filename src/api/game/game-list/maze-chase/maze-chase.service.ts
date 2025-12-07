@@ -16,7 +16,6 @@ export abstract class MazeChaseService {
   private static MAZE_CHASE_SLUG = 'maze-chase';
 
   static async createMazeChase(data: ICreateMazeChase, user_id: string) {
-
     await this.existGameCheck(data.name);
 
     const newGameId = v4();
@@ -193,12 +192,10 @@ export abstract class MazeChaseService {
       map_id: data.map_id ?? oldGameJson?.map_id ?? '',
       countdown: data.countdown ?? oldGameJson?.countdown ?? 0,
       questions: data.questions
-        ? data.questions.map(question => {
-            return {
-              question_text: question.question_text,
-              answers: question.answers,
-            };
-          })
+        ? data.questions.map(question => ({
+            question_text: question.question_text,
+            answers: question.answers,
+          }))
         : (oldGameJson?.questions ?? []),
     };
 
@@ -216,10 +213,10 @@ export abstract class MazeChaseService {
       },
     });
 
-    const newImagePaths: string[] = [thumbnailImagePath];
+    const newImagePaths = new Set([thumbnailImagePath]);
 
     for (const oldPath of oldImagePaths) {
-      if (!newImagePaths.includes(oldPath)) {
+      if (!newImagePaths.has(oldPath)) {
         await FileManager.remove(oldPath);
       }
     }
@@ -405,7 +402,11 @@ export abstract class MazeChaseService {
     };
   }
 
-  static async deleteMazeChase(game_id: string, user_id: string, user_role: ROLE) {
+  static async deleteMazeChase(
+    game_id: string,
+    user_id: string,
+    user_role: ROLE,
+  ) {
     const game = await prisma.games.findUnique({
       where: { id: game_id },
       select: {
@@ -424,7 +425,6 @@ export abstract class MazeChaseService {
         'User cannot delete this game',
       );
 
-    const oldGameJson = game.game_json as IMazeChaseJson | null;
     const oldImagePaths: string[] = [];
 
     if (game.thumbnail_image) oldImagePaths.push(game.thumbnail_image);

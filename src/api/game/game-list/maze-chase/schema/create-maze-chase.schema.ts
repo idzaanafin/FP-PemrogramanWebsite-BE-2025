@@ -26,7 +26,9 @@ export const CreateMazeChaseSchema = z.object({
   is_question_randomized: StringToBooleanSchema.default(false),
   is_answer_randomized: StringToBooleanSchema.default(false),
   score_per_question: z.coerce.number().min(1).max(1000),
-  questions: StringToObjectSchema(z.array(MazeChaseQuestionSchema).min(1).max(20)),
+  questions: StringToObjectSchema(
+    z.array(MazeChaseQuestionSchema).min(1).max(20),
+  ),
 });
 
 export type ICreateMazeChase = z.infer<typeof CreateMazeChaseSchema>;

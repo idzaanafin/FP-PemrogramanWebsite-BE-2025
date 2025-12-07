@@ -29,9 +29,7 @@ export const MazeChaseController = Router()
     validateAuth({}),
     validateBody({
       schema: CreateMazeChaseSchema,
-      file_fields: [
-        { name: 'thumbnail_image', maxCount: 1 },
-      ],
+      file_fields: [{ name: 'thumbnail_image', maxCount: 1 }],
     }),
     async (
       request: AuthedRequest<{}, {}, ICreateMazeChase>,
@@ -137,9 +135,7 @@ export const MazeChaseController = Router()
     validateAuth({}),
     validateBody({
       schema: UpdateMazeChaseSchema,
-      file_fields: [
-        { name: 'thumbnail_image', maxCount: 1 },
-      ],
+      file_fields: [{ name: 'thumbnail_image', maxCount: 1 }],
     }),
     async (
       request: AuthedRequest<{ game_id: string }, {}, IUpdateMazeChase>,

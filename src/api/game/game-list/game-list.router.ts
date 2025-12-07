@@ -2,8 +2,8 @@
 /* eslint-disable import/no-default-export */
 import { Router } from 'express';
 
-import { QuizController } from './quiz/quiz.controller';
 import { MazeChaseController } from './maze-chase/maze-chase.controller';
+import { QuizController } from './quiz/quiz.controller';
 
 const GameListRouter = Router();
 
