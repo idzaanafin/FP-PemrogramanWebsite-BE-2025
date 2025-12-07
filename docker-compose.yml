@@ -10,7 +10,7 @@ services:
     ports:
       - ${POSTGRES_PORT}:5432
     volumes:
-      - ./docker/volumes/:/var/lib/postgresql/data
+      - fp-database-volume:/var/lib/postgresql/data
     networks:
       - fp-network
 
@@ -19,4 +19,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysqldata:
+  fp-database-volume:
