@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import express, {
+import {
   type NextFunction,
   type Request,
   type RequestHandler,
@@ -35,9 +35,6 @@ export const validateBody = <T>({
 }) => {
   const upload = multer({ storage: multer.memoryStorage() });
   const middlewares: RequestHandler[] = [];
-
-  // Parse JSON body first
-  middlewares.push(express.json());
 
   if (file_fields.length > 0) {
     middlewares.push(upload.fields(file_fields));
