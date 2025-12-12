@@ -12,8 +12,7 @@ import {
 } from './schema';
 
 export abstract class MazeChaseService {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  private static MAZE_CHASE_SLUG = 'maze-chase';
+  private static mazeChaseSlug = 'maze-chase';
 
   static async createMazeChase(data: ICreateMazeChase, user_id: string) {
     await this.existGameCheck(data.name);
@@ -91,7 +90,7 @@ export abstract class MazeChaseService {
       },
     });
 
-    if (!game || game.game_template.slug !== this.MAZE_CHASE_SLUG)
+    if (!game || game.game_template.slug !== this.mazeChaseSlug)
       throw new ErrorResponse(StatusCodes.NOT_FOUND, 'Game not found');
 
     if (user_role !== 'SUPER_ADMIN' && game.creator_id !== user_id)
@@ -129,7 +128,7 @@ export abstract class MazeChaseService {
       },
     });
 
-    if (!game || game.game_template.slug !== this.MAZE_CHASE_SLUG)
+    if (!game || game.game_template.slug !== this.mazeChaseSlug)
       throw new ErrorResponse(StatusCodes.NOT_FOUND, 'Game not found');
 
     if (user_role !== 'SUPER_ADMIN' && game.creator_id !== user_id)
@@ -236,7 +235,7 @@ export abstract class MazeChaseService {
       },
     });
 
-    if (!game || game.game_template.slug !== this.MAZE_CHASE_SLUG)
+    if (!game || game.game_template.slug !== this.mazeChaseSlug)
       throw new ErrorResponse(StatusCodes.NOT_FOUND, 'Game not found');
 
     const gameJson = game.game_json as unknown as IMazeChaseJson;
@@ -339,7 +338,7 @@ export abstract class MazeChaseService {
     if (
       !game ||
       (is_public && !game.is_published) ||
-      game.game_template.slug !== this.MAZE_CHASE_SLUG
+      game.game_template.slug !== this.mazeChaseSlug
     )
       throw new ErrorResponse(StatusCodes.NOT_FOUND, 'Game not found');
 
@@ -461,7 +460,7 @@ export abstract class MazeChaseService {
 
   private static async getGameTemplateId() {
     const result = await prisma.gameTemplates.findUnique({
-      where: { slug: this.MAZE_CHASE_SLUG },
+      where: { slug: this.mazeChaseSlug },
       select: { id: true },
     });
 
