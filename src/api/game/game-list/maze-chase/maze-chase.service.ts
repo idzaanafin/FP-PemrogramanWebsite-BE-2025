@@ -377,6 +377,7 @@ export abstract class MazeChaseService {
       const answers = question.answers.map(ans => ({
         answer_text: ans.answer_text,
         answer_index: ans.answer_index,
+        ...(is_public ? {} : { is_correct: ans.is_correct }),
       }));
 
       if (gameJson.is_answer_randomized) this.shuffleArray(answers);

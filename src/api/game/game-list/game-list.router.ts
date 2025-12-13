@@ -15,10 +15,7 @@ const GameListRouter = Router();
 
 GameListRouter.use('/quiz', QuizController);
 GameListRouter.use('/maze-chase', MazeChaseController);
-<<<<<<< HEAD
-=======
 GameListRouter.use('/sliding-puzzle', SlidingPuzzleController);
->>>>>>> upstream/main
 GameListRouter.use('/speed-sorting', SpeedSortingController);
 GameListRouter.use('/anagram', AnagramController);
 GameListRouter.use('/pair-or-no-pair', PairOrNoPairController);

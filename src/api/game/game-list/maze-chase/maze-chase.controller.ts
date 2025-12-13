@@ -114,7 +114,7 @@ export const MazeChaseController = Router()
       try {
         const game = await MazeChaseService.getMazeChasePlay(
           request.params.game_id,
-          true,
+          false,
           request.user!.user_id,
           request.user!.role,
         );
